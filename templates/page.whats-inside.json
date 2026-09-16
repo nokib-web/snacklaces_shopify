@@ -6,6 +6,7 @@
         "flavor_1": {
           "type": "ingredient_item",
           "settings": {
+            "product": "original-pretzel-snacklace",
             "title": "ORIGINAL PRETZEL SNACKLACE",
             "title_color": "#0CBFA5",
             "ingredients": "Enriched flour, salt, yeast, malted barley.",
@@ -15,6 +16,7 @@
         "flavor_2": {
           "type": "ingredient_item",
           "settings": {
+            "product": "chocolate-pretzel-snacklace",
             "title": "CHOCOLATE PRETZEL SNACKLACE",
             "title_color": "#F05534",
             "ingredients": "Pretzels + chocolate coating (sugar, cocoa, milk, soy lecithin).",
@@ -24,6 +26,7 @@
         "flavor_3": {
           "type": "ingredient_item",
           "settings": {
+            "product": "white-chocolate-pretzel-snacklace",
             "title": "WHITE CHOCOLATE PRETZEL SNACKLACE",
             "title_color": "#0CBFA5",
             "ingredients": "Pretzels + white chocolate coating (sugar, milk, cocoa butter, vanilla).",
@@ -33,6 +36,7 @@
         "flavor_4": {
           "type": "ingredient_item",
           "settings": {
+            "product": "gluten-free-pretzel-snacklace",
             "title": "GLUTEN-FREE PRETZEL SNACKLACE",
             "title_color": "#F05534",
             "ingredients": "Gluten-free flour blend (brown rice flour, tapioca starch), salt, yeast.",

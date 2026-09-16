@@ -36,6 +36,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+  }
+
+  .shea-ingredient-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(126, 73, 16, 0.15));
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .shea-ingredient-card:hover .shea-ingredient-img {
+    transform: scale(1.08) rotate(-3deg);
   }
 
   .shea-ingredient-info {
@@ -142,10 +155,33 @@
     <!-- 4 Flavor Ingredients Cards -->
     <div class="shea-ingredients-grid">
       {%- for block in section.blocks -%}
+        {%- liquid
+          assign card_image = blank
+          if block.settings.flavor_image != blank
+            assign card_image = block.settings.flavor_image
+          elsif block.settings.product != blank and block.settings.product.featured_image != blank
+            assign card_image = block.settings.product.featured_image
+          else
+            case forloop.index
+              when 1
+                assign auto_product = all_products['original-pretzel-snacklace']
+              when 2
+                assign auto_product = all_products['chocolate-pretzel-snacklace']
+              when 3
+                assign auto_product = all_products['white-chocolate-pretzel-snacklace']
+              when 4
+                assign auto_product = all_products['gluten-free-pretzel-snacklace']
+            endcase
+            if auto_product != blank and auto_product.featured_image != blank
+              assign card_image = auto_product.featured_image
+            endif
+          endif
+        -%}
         <div class="shea-ingredient-card" {{ block.shopify_attributes }}>
           <div class="shea-ingredient-img-wrap">
-            {%- if block.settings.flavor_image != blank -%}
-              {{ block.settings.flavor_image | image_url: width: 240 | image_tag: 
+            {%- if card_image != blank -%}
+              {{ card_image | image_url: width: 240 | image_tag: 
+                class: 'shea-ingredient-img',
                 loading: 'lazy',
                 alt: block.settings.title | escape
               }}
@@ -195,12 +231,10 @@
             alt: "Shea Snack Boss"
           }}
         {%- else -%}
-          <svg viewBox="0 0 100 100" width="90" height="90" fill="none">
-            <circle cx="50" cy="50" r="42" fill="#FFE0B2" stroke="#7E4910" stroke-width="4"/>
-            <circle cx="40" cy="45" r="5" fill="#4A2C11"/>
-            <circle cx="60" cy="45" r="5" fill="#4A2C11"/>
-            <path d="M40 65 Q50 80 60 65" stroke="#7E4910" stroke-width="4" stroke-linecap="round"/>
-          </svg>
+          {{ 'faq-shea-mascot.png' | asset_url | image_tag: 
+            loading: 'lazy',
+            alt: "Shea Snack Boss"
+          }}
         {%- endif -%}
       </div>
     </div>
@@ -293,9 +327,14 @@
           "default": "#F05534"
         },
         {
+          "type": "product",
+          "id": "product",
+          "label": "Link Store Product (Auto-loads Product Image)"
+        },
+        {
           "type": "image_picker",
           "id": "flavor_image",
-          "label": "Flavor Necklace Image"
+          "label": "Custom Flavor Image (Optional override)"
         },
         {
           "type": "textarea",

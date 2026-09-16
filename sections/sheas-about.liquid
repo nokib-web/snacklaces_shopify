@@ -81,12 +81,11 @@
             alt: "Shea Snack Boss"
           }}
         {%- else -%}
-          <svg class="shea-about-img" viewBox="0 0 240 240" width="220" height="220" fill="none">
-            <circle cx="120" cy="120" r="105" fill="#FFC923" stroke="#7E4910" stroke-width="4"/>
-            <circle cx="120" cy="100" r="50" fill="#FFE0B2" stroke="#7E4910" stroke-width="4"/>
-            <path d="M70 95 C65 50 115 40 140 45 C170 50 180 80 175 100" fill="#FFD54F" stroke="#7E4910" stroke-width="4"/>
-            <path d="M75 220 C75 160 100 135 120 135 C140 135 165 160 165 220" fill="#0CBFA5" stroke="#7E4910" stroke-width="4"/>
-          </svg>
+          {{ 'shea-hero.png' | asset_url | image_tag: 
+            class: 'shea-about-img',
+            loading: 'lazy',
+            alt: "Shea Snack Boss"
+          }}
         {%- endif -%}
       </div>
     </div>
