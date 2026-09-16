@@ -1,0 +1,453 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #SheaPartyPacks-{{ section.id }} .shea-party-packs-container {
+    max-width: {{ section.settings.container_max_width | default: 1200 }}px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .shea-party-hero-wrap {
+    width: {{ section.settings.image_width_percent | default: 100 }}%;
+    max-width: 100%;
+    margin: 0 auto 36px;
+    {%- if section.settings.show_image_card -%}
+      border-radius: var(--shea-radius-card, 24px);
+      overflow: hidden;
+      border: 3.5px solid var(--shea-border-color, #7E4910);
+      box-shadow: var(--shea-shadow-card, 0 8px 0 rgba(126, 73, 16, 0.18));
+      background: #FFFFFF;
+    {%- else -%}
+      border: none;
+      box-shadow: none;
+      background: transparent;
+    {%- endif -%}
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .shea-party-hero-wrap:hover {
+    transform: translateY(-4px);
+  }
+
+  .shea-bundles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 32px 0 40px;
+    width: 100%;
+  }
+
+  .shea-bundle-card {
+    background: #FFFFFF;
+    border: 3px solid var(--shea-border-color, #7E4910);
+    border-radius: var(--shea-radius-card, 24px);
+    box-shadow: var(--shea-shadow-card, 0 8px 0 rgba(126, 73, 16, 0.18));
+    padding: 26px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  }
+
+  .shea-bundle-card:hover {
+    transform: translateY(-8px) scale(1.015);
+    box-shadow: 0 16px 0 rgba(126, 73, 16, 0.22);
+  }
+
+  .shea-bundle-badge-top {
+    font-family: var(--shea-font-display, 'Fredoka', cursive, sans-serif);
+    font-size: 1.35rem;
+    color: var(--shea-teal, #0CBFA5);
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  .shea-bundle-count {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--shea-dark-brown, #4A2C11);
+    margin: 0 0 16px;
+  }
+
+  .shea-bundle-img-wrap {
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .shea-bundle-card:hover .shea-bundle-img-wrap {
+    transform: scale(1.08);
+  }
+
+  .shea-bundle-img {
+    max-width: 100%;
+    max-height: 170px;
+    object-fit: contain;
+  }
+
+  .shea-bundle-sticker-tag {
+    background: var(--shea-teal, #0CBFA5);
+    color: #FFFFFF;
+    font-family: var(--shea-font-display, 'Fredoka', cursive, sans-serif);
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: var(--shea-radius-pill, 9999px);
+    border: 2px solid var(--shea-border-color, #7E4910);
+    margin: 0 auto 12px;
+    display: inline-block;
+    text-transform: uppercase;
+  }
+
+  .shea-bundle-price {
+    font-family: var(--shea-font-display, 'Fredoka', cursive, sans-serif);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--shea-teal, #0CBFA5);
+    margin: 0 0 4px;
+  }
+
+  .shea-bundle-servings {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #7E4910;
+    margin: 0;
+  }
+
+  .shea-bundle-action-wrap {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 850px) {
+    .shea-bundles-grid {
+      grid-template-columns: 1fr;
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+{%- endstyle -%}
+
+<div id="SheaPartyPacks-{{ section.id }}" class="section-{{ section.id }}-padding {% if section.settings.enable_confetti %}shea-confetti-bg{% endif %}">
+  <div class="shea-container">
+    <div class="shea-party-packs-container">
+      <div class="shea-section-header" style="text-align: center; margin-bottom: 32px;">
+        <h1 class="shea-section-title" style="font-size: clamp(2.4rem, 5vw, 4rem); color: var(--shea-coral, #F05534); line-height: 1.05;">
+          {{ section.settings.heading | default: "SNACKLACES FOR PARTIES!" }}
+        </h1>
+        <p class="shea-section-subhead" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 16px;">
+          {{ section.settings.subhead | default: "Delicious. Fun. Totally unforgettable. Perfect for birthdays, class treats, parties, and any day that needs a little extra fun!" }}
+        </p>
+
+        {%- if section.settings.badge_text != blank -%}
+          <div style="margin-top: 14px;">
+            <div class="shea-usecase-ribbon" style="background-color: {{ section.settings.badge_bg | default: '#0CBFA5' }};">
+              {{ section.settings.badge_text }}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.party_image != blank -%}
+        <div class="shea-party-hero-wrap">
+          {{ section.settings.party_image | image_url: width: 1400 | image_tag: class: 'shea-party-hero-img', loading: 'eager', style: 'width: 100%; height: auto; display: block;' }}
+        </div>
+      {%- endif -%}
+
+      <!-- 3 Bundles Grid -->
+      <div class="shea-bundles-grid">
+        {%- for block in section.blocks -%}
+          <div class="shea-bundle-card" {{ block.shopify_attributes }}>
+            <div>
+              <h3 class="shea-bundle-badge-top" style="color: {{ block.settings.title_color | default: '#0CBFA5' }};">
+                🎉 {{ block.settings.title }}
+              </h3>
+              <p class="shea-bundle-count">{{ block.settings.count_text }}</p>
+
+              <div class="shea-bundle-img-wrap">
+                {%- if block.settings.bundle_image != blank -%}
+                  {{ block.settings.bundle_image | image_url: width: 400 | image_tag: 
+                    class: 'shea-bundle-img',
+                    loading: 'lazy',
+                    alt: block.settings.title | escape
+                  }}
+                {%- else -%}
+                  {%- case forloop.index -%}
+                    {%- when 1 -%}
+                      <img src="{{ 'bundle-mini-party.jpg' | asset_url }}" alt="Mini Party Pack" class="shea-bundle-img" loading="lazy">
+                    {%- when 2 -%}
+                      <img src="{{ 'bundle-mega-party.jpg' | asset_url }}" alt="Mega Party Pack" class="shea-bundle-img" loading="lazy">
+                    {%- when 3 -%}
+                      <img src="{{ 'bundle-super-party.jpg' | asset_url }}" alt="Super Party Pack" class="shea-bundle-img" loading="lazy">
+                  {%- endcase -%}
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.badge_tag != blank -%}
+                <div class="shea-bundle-sticker-tag" style="background-color: {{ block.settings.badge_bg | default: '#0CBFA5' }};">
+                  {{ block.settings.badge_tag }}
+                </div>
+              {%- endif -%}
+            </div>
+
+            <div>
+              <div class="shea-bundle-price">{{ block.settings.price }}</div>
+              {%- if block.settings.servings_text != blank -%}
+                <p class="shea-bundle-servings">{{ block.settings.servings_text }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <!-- CTA Button -->
+      <div class="shea-bundle-action-wrap">
+        <a href="{{ section.settings.btn_link | default: '/pages/contact' }}" class="shea-btn shea-btn-coral" style="font-size: 1.35rem; padding: 16px 44px;">
+          {{ section.settings.btn_label | default: "REQUEST A PARTY ORDER 🎉" }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shea Party Packs",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "SNACKLACES FOR PARTIES!"
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Section Subheading",
+      "default": "Delicious. Fun. Totally unforgettable. Perfect for birthdays, class treats, parties, and any day that needs a little extra fun!"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Ribbon Badge Text",
+      "default": "FUN TO WEAR, EVEN BETTER TO EAT! 🥨"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg",
+      "label": "Badge Background Color",
+      "default": "#0CBFA5"
+    },
+    {
+      "type": "image_picker",
+      "id": "party_image",
+      "label": "Party Scene Hero Illustration"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 800,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "label": "Section Max Width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "image_width_percent",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Banner Image Width (% of container)",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_card",
+      "label": "Show Card Border & Shadow on Banner Image",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label",
+      "default": "REQUEST A PARTY ORDER 🎉"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_confetti",
+      "label": "Enable Confetti Background",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle_tier",
+      "name": "Party Pack Tier",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tier Title",
+          "default": "MINI PARTY PACK"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title Color",
+          "default": "#0CBFA5"
+        },
+        {
+          "type": "text",
+          "id": "count_text",
+          "label": "Quantity Subtext",
+          "default": "10 Snacklaces"
+        },
+        {
+          "type": "image_picker",
+          "id": "bundle_image",
+          "label": "Bundle Pack Image"
+        },
+        {
+          "type": "color",
+          "id": "box_color",
+          "label": "Default Box Color (If no image)",
+          "default": "#FFC923"
+        },
+        {
+          "type": "text",
+          "id": "badge_tag",
+          "label": "Callout Badge Text",
+          "default": "PERFECT FOR SMALL PARTIES!"
+        },
+        {
+          "type": "color",
+          "id": "badge_bg",
+          "label": "Callout Badge Background",
+          "default": "#0CBFA5"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price Display",
+          "default": "$28.00"
+        },
+        {
+          "type": "text",
+          "id": "servings_text",
+          "label": "Servings Note",
+          "default": "Approx. 10 servings"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Shopify Product (Optional)",
+          "info": "Link to an actual Shopify product for direct checkout"
+        },
+        {
+          "type": "url",
+          "id": "custom_link",
+          "label": "Custom Link (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shea Party Packs",
+      "blocks": [
+        {
+          "type": "bundle_tier",
+          "settings": {
+            "title": "MINI PARTY PACK",
+            "title_color": "#0CBFA5",
+            "count_text": "10 Snacklaces",
+            "badge_tag": "PERFECT FOR SMALL PARTIES!",
+            "badge_bg": "#0CBFA5",
+            "price": "$28.00",
+            "servings_text": "Approx. 10 servings"
+          }
+        },
+        {
+          "type": "bundle_tier",
+          "settings": {
+            "title": "MEGA PARTY PACK",
+            "title_color": "#0CBFA5",
+            "count_text": "20 Snacklaces",
+            "badge_tag": "GREAT FOR CLASSROOMS & EVENTS!",
+            "badge_bg": "#0CBFA5",
+            "box_color": "#FFAD00",
+            "price": "$52.00",
+            "servings_text": "Approx. 20 servings"
+          }
+        },
+        {
+          "type": "bundle_tier",
+          "settings": {
+            "title": "SUPER PARTY PACK",
+            "title_color": "#F05534",
+            "count_text": "50 Snacklaces",
+            "badge_tag": "BIG FUN FOR BIG CELEBRATIONS!",
+            "badge_bg": "#F05534",
+            "box_color": "#F05534",
+            "price": "$120.00",
+            "servings_text": "Approx. 50 servings"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,379 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .shea-trust-bar-section {
+    background-color: {{ section.settings.bg_color | default: '#FFFBEA' }};
+    position: relative;
+    width: 100%;
+    margin-top: {{ section.settings.margin_top }}px;
+    box-sizing: border-box;
+  }
+
+  /* Scallop / Wavy Top Border SVG */
+  .shea-scallop-wave-top {
+    position: absolute;
+    top: -24px;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    overflow: hidden;
+    line-height: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .shea-scallop-wave-top svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    fill: {{ section.settings.bg_color | default: '#FFFBEA' }};
+  }
+
+  .shea-trust-bar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    gap: 0;
+    width: 100%;
+  }
+
+  .shea-trust-bar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 18px 24px;
+    position: relative;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .shea-trust-bar-item:hover {
+    transform: translateY(-3px) scale(1.02);
+  }
+
+  /* Vertical Dotted Divider between items */
+  .shea-trust-bar-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    border-right: 2.5px dotted {{ section.settings.divider_color | default: '#FFAD00' }};
+  }
+
+  .shea-trust-icon-box {
+    width: 54px;
+    height: 54px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .shea-trust-bar-item:hover .shea-trust-icon-box {
+    transform: scale(1.15) rotate(-6deg);
+  }
+
+  .shea-trust-icon-box svg,
+  .shea-trust-icon-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .shea-trust-text-box {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .shea-trust-item-title {
+    font-family: var(--shea-font-display, 'Fredoka', cursive, sans-serif);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--shea-dark-brown, #4A2C11);
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .shea-trust-item-sub {
+    font-family: var(--shea-font-body, 'Quicksand', sans-serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--shea-brown, #7E4910);
+    margin-top: 2px;
+  }
+
+  @media (max-width: 1024px) {
+    .shea-trust-bar-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .shea-trust-bar-item:nth-child(2)::after {
+      display: none;
+    }
+    .shea-trust-bar-item:nth-child(1),
+    .shea-trust-bar-item:nth-child(2) {
+      border-bottom: 2.5px dotted {{ section.settings.divider_color | default: '#FFAD00' }};
+    }
+  }
+
+  @media (max-width: 640px) {
+    .shea-trust-bar-grid {
+      grid-template-columns: 1fr;
+    }
+    .shea-trust-bar-item {
+      padding: 14px 16px;
+      justify-content: flex-start;
+    }
+    .shea-trust-bar-item::after {
+      display: none !important;
+    }
+    .shea-trust-bar-item:not(:last-child) {
+      border-bottom: 2px dotted {{ section.settings.divider_color | default: '#FFAD00' }};
+    }
+    .shea-trust-item-title {
+      font-size: 0.98rem;
+    }
+  }
+{%- endstyle -%}
+
+<div id="SheaTrustBar-{{ section.id }}" class="shea-trust-bar-section section-{{ section.id }}-padding">
+  {%- if section.settings.show_scallop_wave -%}
+    <!-- Scalloped Wavy Top Border -->
+    <div class="shea-scallop-wave-top" aria-hidden="true">
+      <svg viewBox="0 0 1200 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,24 L0,12 C15,0 35,0 50,12 C65,24 85,24 100,12 C115,0 135,0 150,12 C165,24 185,24 200,12 C215,0 235,0 250,12 C265,24 285,24 300,12 C315,0 335,0 350,12 C365,24 385,24 400,12 C415,0 435,0 450,12 C465,24 485,24 500,12 C515,0 535,0 550,12 C565,24 585,24 600,12 C615,0 635,0 650,12 C665,24 685,24 700,12 C715,0 735,0 750,12 C765,24 785,24 800,12 C815,0 835,0 850,12 C865,24 885,24 900,12 C915,0 935,0 950,12 C965,24 985,24 1000,12 C1015,0 1035,0 1050,12 C1065,24 1085,24 1100,12 C1115,0 1135,0 1150,12 C1165,24 1185,24 1200,12 L1200,24 Z"></path>
+      </svg>
+    </div>
+  {%- endif -%}
+
+  <div class="shea-container">
+    <div class="shea-trust-bar-grid">
+      {%- for block in section.blocks -%}
+        <div class="shea-trust-bar-item" {{ block.shopify_attributes }}>
+          <div class="shea-trust-icon-box">
+            {%- if block.settings.custom_icon != blank -%}
+              {{ block.settings.custom_icon | image_url: width: 100 | image_tag: loading: 'lazy', alt: block.settings.title }}
+            {%- else -%}
+              {%- case block.settings.icon_preset -%}
+                {%- when 'pretzel' -%}
+                  <!-- Cartoon Pretzel SVG -->
+                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32 14C22 4 8 10 8 24C8 38 20 46 32 58C44 46 56 38 56 24C56 10 42 4 32 14Z" fill="#D97706" stroke="#4A2C11" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M22 24C18 20 14 26 18 32C22 38 28 42 32 46C36 42 42 38 46 32C50 26 46 20 42 24C38 28 35 34 32 38C29 34 26 28 22 24Z" fill="#F59E0B" stroke="#4A2C11" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Salt Dots -->
+                    <circle cx="20" cy="16" r="1.8" fill="#FFFFFF"/>
+                    <circle cx="44" cy="16" r="1.8" fill="#FFFFFF"/>
+                    <circle cx="12" cy="28" r="1.8" fill="#FFFFFF"/>
+                    <circle cx="52" cy="28" r="1.8" fill="#FFFFFF"/>
+                    <circle cx="32" cy="52" r="1.8" fill="#FFFFFF"/>
+                  </svg>
+                {%- when 'calendar' -%}
+                  <!-- Cartoon Calendar with Checkmark SVG -->
+                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="8" y="14" width="48" height="42" rx="10" fill="#FFFFFF" stroke="#4A2C11" stroke-width="4.5"/>
+                    <path d="M8 26H56" stroke="#4A2C11" stroke-width="4"/>
+                    <path d="M8 18C8 15.79 9.79 14 12 14H52C54.21 14 56 15.79 56 18V26H8V18Z" fill="#F05534"/>
+                    <rect x="18" y="8" width="6" height="12" rx="3" fill="#4A2C11"/>
+                    <rect x="40" y="8" width="6" height="12" rx="3" fill="#4A2C11"/>
+                    <!-- Calendar Grid Lines -->
+                    <path d="M20 34H26M38 34H44M20 42H26" stroke="#D1D5DB" stroke-width="3.5" stroke-linecap="round"/>
+                    <!-- Green Check Badge -->
+                    <circle cx="44" cy="44" r="12" fill="#0CBFA5" stroke="#4A2C11" stroke-width="3.5"/>
+                    <path d="M38 44L42 48L50 40" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {%- when 'shield' -%}
+                  <!-- Cartoon Teal Shield with Checkmark SVG -->
+                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32 6L10 16V30C10 44 20 54 32 58C44 54 54 44 54 30V16L32 6Z" fill="#0CBFA5" stroke="#4A2C11" stroke-width="4.5" stroke-linejoin="round"/>
+                    <path d="M32 12L16 19.5V30C16 40.5 23.5 48 32 51.5C40.5 48 48 40.5 48 30V19.5L32 12Z" fill="#2CE5CA"/>
+                    <path d="M24 32L30 38L42 26" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M24 32L30 38L42 26" stroke="#4A2C11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {%- when 'heart' -%}
+                  <!-- Cartoon Teal/Red Heart SVG -->
+                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32 56C32 56 8 42 8 24C8 14 16 8 24 8C29 8 32 12 32 12C32 12 35 8 40 8C48 8 56 14 56 24C56 42 32 56 32 56Z" fill="#0CBFA5" stroke="#4A2C11" stroke-width="4.5" stroke-linejoin="round"/>
+                    <!-- Highlight -->
+                    <path d="M16 18C18 14 22 12 26 14" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+                  </svg>
+                {%- when 'mascot' -%}
+                  <!-- Cartoon Shea Face SVG -->
+                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="32" r="26" fill="#FEE2E2" stroke="#4A2C11" stroke-width="4.5"/>
+                    <path d="M12 28C14 14 24 10 32 10C40 10 50 14 52 28C52 28 44 20 32 20C20 20 12 28 12 28Z" fill="#FBBF24" stroke="#4A2C11" stroke-width="3.5"/>
+                    <circle cx="24" cy="34" r="3.5" fill="#4A2C11"/>
+                    <circle cx="40" cy="34" r="3.5" fill="#4A2C11"/>
+                    <path d="M26 42C28 46 36 46 38 42" stroke="#4A2C11" stroke-width="3.5" stroke-linecap="round"/>
+                  </svg>
+              {%- endcase -%}
+            {%- endif -%}
+          </div>
+
+          <div class="shea-trust-text-box">
+            <h4 class="shea-trust-item-title">
+              {{ block.settings.title }}
+              {%- if block.settings.emoji_suffix != blank -%}
+                <span>{{ block.settings.emoji_suffix }}</span>
+              {%- endif -%}
+            </h4>
+            {%- if block.settings.subtext != blank -%}
+              <span class="shea-trust-item-sub">{{ block.settings.subtext }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shea Global Trust Bar",
+  "tag": "section",
+  "class": "section shea-global-trust-bar-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_scallop_wave",
+      "label": "Show Scalloped Wavy Top Border",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFBEA"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider Dotted Color",
+      "default": "#FFAD00"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 8,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 8,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust Pillar",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_preset",
+          "label": "Icon Preset",
+          "options": [
+            { "value": "pretzel", "label": "Pretzel 🥨" },
+            { "value": "calendar", "label": "Fresh Calendar 📅" },
+            { "value": "shield", "label": "Safe Shield 🛡️" },
+            { "value": "heart", "label": "Teal Heart 💚" },
+            { "value": "mascot", "label": "Shea Face 🧒" }
+          ],
+          "default": "pretzel"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom Icon Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "HANDMADE WITH LOVE"
+        },
+        {
+          "type": "text",
+          "id": "emoji_suffix",
+          "label": "Emoji / Heart Suffix (Optional)",
+          "default": "❤️"
+        },
+        {
+          "type": "text",
+          "id": "subtext",
+          "label": "Subtext (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shea Global Trust Bar",
+      "blocks": [
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon_preset": "pretzel",
+            "title": "HANDMADE WITH LOVE",
+            "emoji_suffix": "❤️"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon_preset": "calendar",
+            "title": "FRESH & DELICIOUS",
+            "emoji_suffix": ""
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon_preset": "shield",
+            "title": "SAFE INGREDIENTS YOU CAN TRUST",
+            "emoji_suffix": ""
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon_preset": "heart",
+            "title": "SUPPORT A KIDPRENEUR!",
+            "emoji_suffix": ""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

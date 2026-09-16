@@ -1,0 +1,98 @@
+{
+  "sections": {
+    "main_faq": {
+      "type": "sheas-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are Snacklaces?",
+            "answer": "<p>Snacklaces are wearable pretzel necklaces that are super fun to wear and even better to eat! Each one is handmade with tasty ingredients and lots of love by 7-year-old snack boss, Shea. 🥨</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What flavors do you offer?",
+            "answer": "<p>We offer four delicious flavors: Original Pretzel ($3), Chocolate Pretzel ($5), White Chocolate Pretzel ($5), and Gluten-Free Pretzel ($5)!</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are Snacklaces safe for kids?",
+            "answer": "<p>Yes! Our Snacklaces are made with simple, snackable ingredients. However, because they contain small pieces, we recommend adult supervision for children under 3 years old. Safety first, snacks second! 💛</p><p>See our <a href='/pages/whats-inside'>Ingredients & Allergens</a> page for full details.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What ingredients are in your Snacklaces?",
+            "answer": "<p>We use quality pretzels, creamy coatings, and simple baking ingredients. See our <a href='/pages/whats-inside'>What's Inside & Allergens</a> page for complete ingredient lists.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer gluten-free options?",
+            "answer": "<p>Yes! Our Gluten-Free Pretzel Snacklace is made with certified gluten-free pretzels so everyone can snack along!</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should I store my Snacklaces?",
+            "answer": "<p>Store your Snacklaces in a cool, dry place away from direct sunlight. In warm weather, keep chocolate snacklaces cool so they don't melt!</p>"
+          }
+        },
+        "faq_7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long do Snacklaces stay fresh?",
+            "answer": "<p>Snacklaces stay fresh, crunchy, and delicious for up to 3 weeks in their sealed packaging.</p>"
+          }
+        },
+        "faq_8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you ship everywhere?",
+            "answer": "<p>We currently ship anywhere in the United States! Orders typically process in 1-2 business days.</p>"
+          }
+        },
+        "faq_9": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I order Snacklaces for a party or event?",
+            "answer": "<p>Absolutely! Check out our <a href='/pages/party-packs'>Party Packs</a> (10, 20, or 50 count) or reach out via our <a href='/pages/contact'>Contact</a> page for custom party orders!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9"
+      ],
+      "settings": {
+        "heading": "SNACK QUESTIONS?",
+        "subhead": "We've got answers! If you don't see yours, just reach out — we love hearing from our <span class='shea-highlight-teal'>Snack Squad!</span> 💛",
+        "open_first": true,
+        "show_contact_card": true,
+        "contact_heading": "Still have a question?",
+        "contact_subhead": "We're here to help and love hearing from you! ♡",
+        "contact_btn_label": "CONTACT US →",
+        "contact_link": "/pages/contact",
+        "padding_top": 40,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main_faq"
+  ]
+}

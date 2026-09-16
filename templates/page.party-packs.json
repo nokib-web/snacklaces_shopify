@@ -1,0 +1,107 @@
+{
+  "sections": {
+    "main_party_packs": {
+      "type": "sheas-party-packs",
+      "blocks": {
+        "tier_1": {
+          "type": "bundle_tier",
+          "settings": {
+            "title": "MINI PARTY PACK",
+            "title_color": "#0CBFA5",
+            "count_text": "10 Snacklaces",
+            "badge_tag": "PERFECT FOR SMALL PARTIES!",
+            "badge_bg": "#0CBFA5",
+            "price": "$28.00",
+            "servings_text": "Approx. 10 servings"
+          }
+        },
+        "tier_2": {
+          "type": "bundle_tier",
+          "settings": {
+            "title": "MEGA PARTY PACK",
+            "title_color": "#0CBFA5",
+            "count_text": "20 Snacklaces",
+            "badge_tag": "GREAT FOR CLASSROOMS & EVENTS!",
+            "badge_bg": "#0CBFA5",
+            "box_color": "#FFAD00",
+            "price": "$52.00",
+            "servings_text": "Approx. 20 servings"
+          }
+        },
+        "tier_3": {
+          "type": "bundle_tier",
+          "settings": {
+            "title": "SUPER PARTY PACK",
+            "title_color": "#F05534",
+            "count_text": "50 Snacklaces",
+            "badge_tag": "BIG FUN FOR BIG CELEBRATIONS!",
+            "badge_bg": "#F05534",
+            "box_color": "#F05534",
+            "price": "$120.00",
+            "servings_text": "Approx. 50 servings"
+          }
+        }
+      },
+      "block_order": [
+        "tier_1",
+        "tier_2",
+        "tier_3"
+      ],
+      "settings": {
+        "heading": "SNACKLACES FOR PARTIES!",
+        "subhead": "Delicious. Fun. Totally unforgettable. Perfect for birthdays, class treats, parties, and any day that needs a little extra fun!",
+        "btn_label": "REQUEST A PARTY ORDER 🎉"
+      }
+    },
+    "value_props": {
+      "type": "sheas-value-props",
+      "blocks": {
+        "prop_1": {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "smiley",
+            "title": "KID-APPROVED",
+            "description": "Fun to wear. Even better to eat!"
+          }
+        },
+        "prop_2": {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "heart",
+            "title": "MADE WITH LOVE",
+            "description": "Handmade in small batches by 7-year-old Shea!"
+          }
+        },
+        "prop_3": {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "pretzel",
+            "title": "FRESH & YUMMY",
+            "description": "Made with quality ingredients for crunchy goodness."
+          }
+        },
+        "prop_4": {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "star",
+            "title": "PERFECT FOR ANY OCCASION",
+            "description": "Birthdays, parties, school events & playdates!"
+          }
+        }
+      },
+      "block_order": [
+        "prop_1",
+        "prop_2",
+        "prop_3",
+        "prop_4"
+      ],
+      "settings": {
+        "card_bg": "#FFFBEA"
+      }
+    }
+  },
+  "order": [
+    "main_party_packs",
+    "value_props"
+  ]
+}

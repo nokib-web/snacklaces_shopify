@@ -1,0 +1,193 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #SheaValueProps-{{ section.id }} .shea-value-props-bar {
+    background-color: {{ section.settings.card_bg | default: '#FFFBEA' }};
+  }
+{%- endstyle -%}
+
+<div id="SheaValueProps-{{ section.id }}" class="shea-value-props-wrap section-{{ section.id }}-padding">
+  <div class="shea-container">
+    <div class="shea-value-props-bar">
+      {%- for block in section.blocks -%}
+        <div class="shea-prop-item" {{ block.shopify_attributes }}>
+          <div class="shea-prop-icon">
+            {%- if block.settings.custom_icon != blank -%}
+              {{ block.settings.custom_icon | image_url: width: 100 | image_tag: 
+                loading: 'lazy',
+                alt: block.settings.title | escape
+              }}
+            {%- else -%}
+              {%- case block.settings.icon_type -%}
+                {%- when 'pretzel' -%}
+                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="32" r="26" fill="#FFC923" stroke="#7E4910" stroke-width="4"/>
+                    <path d="M22 28C22 24 26 20 32 24C38 20 42 24 42 28C42 34 32 40 32 40C32 40 22 34 22 28Z" fill="#FFAD00" stroke="#7E4910" stroke-width="3"/>
+                    <circle cx="28" cy="28" r="3" fill="#FFFFFF"/>
+                    <circle cx="36" cy="28" r="3" fill="#FFFFFF"/>
+                  </svg>
+                {%- when 'smiley' -%}
+                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="32" r="26" fill="#FFC923" stroke="#7E4910" stroke-width="4"/>
+                    <circle cx="24" cy="26" r="4" fill="#4A2C11"/>
+                    <circle cx="40" cy="26" r="4" fill="#4A2C11"/>
+                    <path d="M22 38C26 44 38 44 42 38" stroke="#7E4910" stroke-width="4" stroke-linecap="round"/>
+                  </svg>
+                {%- when 'heart' -%}
+                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32 50C32 50 14 38 14 26C14 18 20 14 26 14C30 14 32 18 32 18C32 18 34 14 38 14C44 14 50 18 50 26C50 38 32 50 32 50Z" fill="#F05534" stroke="#7E4910" stroke-width="4"/>
+                  </svg>
+                {%- when 'star' -%}
+                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32 10L38 24L52 26L42 36L44 50L32 43L20 50L22 36L12 26L26 24L32 10Z" fill="#0CBFA5" stroke="#7E4910" stroke-width="4" stroke-linejoin="round"/>
+                  </svg>
+                {%- else -%}
+                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="32" r="26" fill="#0CBFA5" stroke="#7E4910" stroke-width="4"/>
+                  </svg>
+              {%- endcase -%}
+            {%- endif -%}
+          </div>
+
+          <h3 class="shea-prop-title" style="color: {{ block.settings.title_color }};">
+            {{ block.settings.title }}
+          </h3>
+          <p class="shea-prop-desc">{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shea Value Props",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background Color",
+      "default": "#FFFBEA"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 32
+    }
+  ],
+  "blocks": [
+    {
+      "type": "prop_item",
+      "name": "Value Prop Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Default Icon Graphic",
+          "options": [
+            { "value": "pretzel", "label": "Pretzel" },
+            { "value": "smiley", "label": "Smiley Face" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "pretzel"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom Icon Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Prop Title",
+          "default": "FUN TO WEAR"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title Color",
+          "default": "#0CBFA5"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description Text",
+          "default": "Lightweight and comfy for all-day fun."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shea Value Props",
+      "blocks": [
+        {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "pretzel",
+            "title": "FUN TO WEAR",
+            "title_color": "#0CBFA5",
+            "description": "Lightweight and comfy for all-day fun."
+          }
+        },
+        {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "smiley",
+            "title": "EVEN BETTER TO EAT",
+            "title_color": "#0CBFA5",
+            "description": "Made with yummy ingredients."
+          }
+        },
+        {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "heart",
+            "title": "MADE WITH LOVE",
+            "title_color": "#0CBFA5",
+            "description": "Handmade in small batches by a 7-year-old snack boss!"
+          }
+        },
+        {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "star",
+            "title": "PERFECT FOR ANY OCCASION",
+            "title_color": "#0CBFA5",
+            "description": "Birthdays, parties, gifts & more!"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

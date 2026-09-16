@@ -1,0 +1,848 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<style>
+  /* ===================================================
+     FAQ SECTION — EXACT MOCKUP MATCH
+     =================================================== */
+
+  .shea-faq-section {
+    background-color: #FFC923;
+    position: relative;
+    overflow: hidden;
+    padding: 40px 0 60px;
+  }
+
+  /* ── Confetti SVG layer (scattered all over) ── */
+  .shea-faq-confetti {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Inner container ── */
+  .shea-faq-inner {
+    position: relative;
+    z-index: 2;
+    max-width: {{ section.settings.container_max_width | default: 960 }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ===================================================
+     HEADER: Left title + Right necklace
+     =================================================== */
+  .shea-faq-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .shea-faq-header-left {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .shea-faq-header-right {
+    flex: 0 0 220px;
+    width: 220px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin-top: -10px;
+  }
+
+  .shea-faq-header-right img {
+    width: 220px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 0 rgba(126,73,16,0.18));
+  }
+
+  /* Necklace placeholder when no image uploaded */
+  .shea-faq-necklace-placeholder {
+    width: 220px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Giant cartoon title ── */
+  .shea-faq-title {
+    font-family: var(--shea-font-display, 'Fredoka', sans-serif);
+    font-size: clamp(3.2rem, 8vw, 5.6rem);
+    font-weight: 800;
+    color: #F05534;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: -1px;
+    margin: 0 0 20px 0;
+    /* White outline + brown shadow = 3D cartoon effect */
+    -webkit-text-stroke: 4px #FFFFFF;
+    paint-order: stroke fill;
+    text-shadow:
+      6px 6px 0 rgba(126, 73, 16, 0.30);
+  }
+
+  .shea-faq-title span {
+    display: block;
+  }
+
+  /* ── Subheading below title ── */
+  .shea-faq-subtext {
+    font-family: var(--shea-font-body, 'Quicksand', sans-serif);
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+    font-weight: 700;
+    color: #4A2C11;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 520px;
+  }
+
+  .shea-faq-subtext .faq-squad-link {
+    color: #0CBFA5;
+    font-weight: 800;
+  }
+
+  /* ===================================================
+     FAQ ACCORDION LIST
+     =================================================== */
+  .shea-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .shea-faq-item {
+    background: #FFFFFF;
+    border: 3px solid #4A2C11;
+    border-radius: 18px;
+    box-shadow: 0 5px 0 rgba(74, 44, 17, 0.22);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .shea-faq-item[open] {
+    box-shadow: 0 5px 0 rgba(74, 44, 17, 0.22);
+  }
+
+  .shea-faq-summary {
+    padding: 16px 20px 16px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    gap: 14px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .shea-faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .shea-faq-q-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Teal circular "?" badge — exactly like mockup */
+  .shea-faq-badge {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 50%;
+    background: #0CBFA5;
+    border: 2.5px solid #4A2C11;
+    box-shadow: 0 3px 0 #4A2C11;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--shea-font-display, 'Fredoka', sans-serif);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .shea-faq-question {
+    font-family: var(--shea-font-display, 'Fredoka', sans-serif);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    font-weight: 700;
+    color: #4A2C11;
+    line-height: 1.3;
+    text-align: left;
+  }
+
+  /* Chevron icon */
+  .shea-faq-chevron {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+    color: #4A2C11;
+  }
+
+  .shea-faq-item[open] .shea-faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Answer content */
+  .shea-faq-answer {
+    padding: 2px 20px 18px 66px;
+    font-family: var(--shea-font-body, 'Quicksand', sans-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #4A2C11;
+    line-height: 1.55;
+  }
+
+  .shea-faq-answer p {
+    margin: 0 0 8px;
+  }
+
+  .shea-faq-answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .shea-faq-answer a {
+    color: #0CBFA5;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .shea-faq-answer a:hover {
+    color: #F05534;
+  }
+
+  /* ===================================================
+     BOTTOM CTA CARD — Mascot | Text | Jar
+     =================================================== */
+  .shea-faq-cta-card {
+    background: #FFF9E6;
+    border: 3.5px solid #4A2C11;
+    border-radius: 24px;
+    box-shadow: 0 6px 0 rgba(74, 44, 17, 0.22);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow: hidden;
+    min-height: 130px;
+  }
+
+  /* Left mascot slot */
+  .shea-faq-cta-mascot {
+    flex: 0 0 140px;
+    width: 140px;
+    min-height: 130px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .shea-faq-cta-mascot img {
+    width: 140px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* Mascot placeholder */
+  .shea-faq-cta-mascot-placeholder {
+    width: 140px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Center text block */
+  .shea-faq-cta-text {
+    flex: 1 1 0;
+    text-align: center;
+    padding: 20px 12px;
+  }
+
+  .shea-faq-cta-heading {
+    font-family: var(--shea-font-display, 'Fredoka', sans-serif);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 800;
+    color: #4A2C11;
+    margin: 0 0 4px;
+    line-height: 1.2;
+  }
+
+  .shea-faq-cta-sub {
+    font-family: var(--shea-font-body, 'Quicksand', sans-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #4A2C11;
+    margin: 0 0 16px;
+  }
+
+  .shea-faq-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #F05534;
+    color: #FFFFFF;
+    font-family: var(--shea-font-display, 'Fredoka', sans-serif);
+    font-size: 1.15rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 32px;
+    border-radius: 50px;
+    border: 3px solid #4A2C11;
+    box-shadow: 0 5px 0 #4A2C11;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .shea-faq-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 #4A2C11;
+    color: #FFFFFF;
+  }
+
+  .shea-faq-cta-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #4A2C11;
+  }
+
+  /* Right jar slot */
+  .shea-faq-cta-jar {
+    flex: 0 0 130px;
+    width: 130px;
+    min-height: 130px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .shea-faq-cta-jar img {
+    width: 120px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* Jar placeholder */
+  .shea-faq-cta-jar-placeholder {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ===================================================
+     RESPONSIVE
+     =================================================== */
+  @media (max-width: 750px) {
+    .shea-faq-header-right {
+      flex: 0 0 160px;
+      width: 160px;
+    }
+    .shea-faq-header-right img,
+    .shea-faq-necklace-placeholder {
+      width: 160px;
+    }
+    .shea-faq-title {
+      -webkit-text-stroke: 3px #FFFFFF;
+    }
+    .shea-faq-cta-mascot,
+    .shea-faq-cta-mascot-placeholder {
+      flex: 0 0 100px;
+      width: 100px;
+    }
+    .shea-faq-cta-jar,
+    .shea-faq-cta-jar-placeholder {
+      flex: 0 0 90px;
+      width: 90px;
+    }
+    .shea-faq-cta-jar img {
+      width: 90px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .shea-faq-header-right {
+      display: none;
+    }
+    .shea-faq-answer {
+      padding-left: 52px;
+    }
+    .shea-faq-cta-mascot,
+    .shea-faq-cta-jar {
+      display: none;
+    }
+  }
+</style>
+
+<div class="shea-faq-section section-{{ section.id }}-padding">
+
+  <!-- ═══ SCATTERED CONFETTI ALL OVER BACKGROUND ═══ -->
+  <svg class="shea-faq-confetti" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <!-- Left edge sprinkles -->
+    <rect x="14" y="60"  width="10" height="22" rx="5" transform="rotate(-30 14 60)"  fill="#F05534"/>
+    <circle cx="30" cy="130" r="7" fill="#0CBFA5"/>
+    <rect x="8"  y="195" width="9"  height="20" rx="4" transform="rotate(20 8 195)"   fill="#FFAD00"/>
+    <circle cx="22" cy="270" r="5" fill="#7E4910"/>
+    <rect x="16" y="340" width="10" height="22" rx="5" transform="rotate(-15 16 340)" fill="#0CBFA5"/>
+    <circle cx="34" cy="410" r="8" fill="#F05534"/>
+    <rect x="6"  y="480" width="9"  height="20" rx="4" transform="rotate(35 6 480)"   fill="#FFAD00"/>
+    <circle cx="26" cy="550" r="6" fill="#0CBFA5"/>
+    <rect x="12" y="620" width="10" height="22" rx="5" transform="rotate(-20 12 620)" fill="#F05534"/>
+    <circle cx="38" cy="700" r="7" fill="#7E4910"/>
+    <rect x="8"  y="770" width="9"  height="20" rx="4" transform="rotate(25 8 770)"   fill="#0CBFA5"/>
+    <circle cx="20" cy="840" r="5" fill="#F05534"/>
+    <rect x="16" y="910" width="10" height="22" rx="5" transform="rotate(-10 16 910)" fill="#FFAD00"/>
+    <circle cx="32" cy="980" r="7" fill="#0CBFA5"/>
+    <rect x="6"  y="1060" width="9" height="20" rx="4" transform="rotate(30 6 1060)"  fill="#F05534"/>
+    <circle cx="28" cy="1140" r="6" fill="#7E4910"/>
+
+    <!-- Right edge sprinkles -->
+    <rect x="858" y="80"   width="10" height="22" rx="5" transform="rotate(30 858 80)"   fill="#0CBFA5"/>
+    <circle cx="875" cy="155" r="7" fill="#F05534"/>
+    <rect x="866" y="220"  width="9"  height="20" rx="4" transform="rotate(-25 866 220)"  fill="#FFAD00"/>
+    <circle cx="850" cy="295" r="5" fill="#0CBFA5"/>
+    <rect x="860" y="365"  width="10" height="22" rx="5" transform="rotate(18 860 365)"  fill="#F05534"/>
+    <circle cx="876" cy="440" r="8" fill="#7E4910"/>
+    <rect x="862" y="510"  width="9"  height="20" rx="4" transform="rotate(-32 862 510)"  fill="#0CBFA5"/>
+    <circle cx="852" cy="585" r="6" fill="#F05534"/>
+    <rect x="868" y="655"  width="10" height="22" rx="5" transform="rotate(22 868 655)"  fill="#FFAD00"/>
+    <circle cx="878" cy="730" r="7" fill="#0CBFA5"/>
+    <rect x="856" y="800"  width="9"  height="20" rx="4" transform="rotate(-18 856 800)"  fill="#F05534"/>
+    <circle cx="870" cy="870" r="5" fill="#7E4910"/>
+    <rect x="862" y="940"  width="10" height="22" rx="5" transform="rotate(28 862 940)"  fill="#0CBFA5"/>
+    <circle cx="854" cy="1015" r="7" fill="#F05534"/>
+    <rect x="866" y="1080" width="9"  height="20" rx="4" transform="rotate(-15 866 1080)" fill="#FFAD00"/>
+    <circle cx="875" cy="1150" r="6" fill="#0CBFA5"/>
+
+    <!-- Scattered interior dots & pills -->
+    <circle cx="120" cy="50"  r="6"  fill="#F05534"/>
+    <rect x="190" y="30"  width="10" height="22" rx="5" transform="rotate(20 190 30)"   fill="#0CBFA5"/>
+    <circle cx="310" cy="70"  r="5"  fill="#7E4910"/>
+    <rect x="400" y="20"  width="9"  height="20" rx="4" transform="rotate(-30 400 20)"  fill="#F05534"/>
+    <circle cx="550" cy="55"  r="7"  fill="#FFAD00"/>
+    <rect x="640" y="35"  width="10" height="22" rx="5" transform="rotate(15 640 35)"   fill="#0CBFA5"/>
+    <circle cx="760" cy="45"  r="6"  fill="#F05534"/>
+
+    <rect x="80"  y="170" width="9"  height="20" rx="4" transform="rotate(25 80 170)"   fill="#FFAD00"/>
+    <circle cx="175" cy="200" r="6"  fill="#0CBFA5"/>
+    <rect x="260" y="150" width="10" height="22" rx="5" transform="rotate(-20 260 150)"  fill="#F05534"/>
+    <circle cx="450" cy="180" r="5"  fill="#7E4910"/>
+    <rect x="530" y="165" width="9"  height="20" rx="4" transform="rotate(32 530 165)"  fill="#0CBFA5"/>
+    <circle cx="700" cy="155" r="7"  fill="#F05534"/>
+    <rect x="790" y="175" width="10" height="22" rx="5" transform="rotate(-28 790 175)"  fill="#FFAD00"/>
+
+    <circle cx="100" cy="330" r="7"  fill="#F05534"/>
+    <rect x="210" y="310" width="10" height="22" rx="5" transform="rotate(18 210 310)"  fill="#0CBFA5"/>
+    <circle cx="350" cy="340" r="5"  fill="#FFAD00"/>
+    <rect x="490" y="305" width="9"  height="20" rx="4" transform="rotate(-22 490 305)"  fill="#7E4910"/>
+    <circle cx="600" cy="345" r="6"  fill="#F05534"/>
+    <rect x="710" y="325" width="10" height="22" rx="5" transform="rotate(28 710 325)"  fill="#0CBFA5"/>
+    <circle cx="820" cy="335" r="5"  fill="#FFAD00"/>
+
+    <rect x="60"  y="500" width="9"  height="20" rx="4" transform="rotate(-30 60 500)"  fill="#0CBFA5"/>
+    <circle cx="160" cy="530" r="6"  fill="#F05534"/>
+    <rect x="280" y="510" width="10" height="22" rx="5" transform="rotate(20 280 510)"  fill="#7E4910"/>
+    <circle cx="420" cy="495" r="7"  fill="#0CBFA5"/>
+    <rect x="560" y="525" width="9"  height="20" rx="4" transform="rotate(-18 560 525)"  fill="#F05534"/>
+    <circle cx="680" cy="505" r="5"  fill="#FFAD00"/>
+    <rect x="800" y="515" width="10" height="22" rx="5" transform="rotate(25 800 515)"  fill="#0CBFA5"/>
+
+    <circle cx="90"  cy="690" r="5"  fill="#7E4910"/>
+    <rect x="200"  y="670" width="10" height="22" rx="5" transform="rotate(30 200 670)"  fill="#F05534"/>
+    <circle cx="320" cy="710" r="7"  fill="#0CBFA5"/>
+    <rect x="460"  y="685" width="9"  height="20" rx="4" transform="rotate(-25 460 685)"  fill="#FFAD00"/>
+    <circle cx="590" cy="695" r="5"  fill="#F05534"/>
+    <rect x="720"  y="675" width="10" height="22" rx="5" transform="rotate(15 720 675)"  fill="#7E4910"/>
+    <circle cx="820" cy="705" r="6"  fill="#0CBFA5"/>
+
+    <rect x="70"   y="850" width="9"  height="20" rx="4" transform="rotate(-20 70 850)"   fill="#F05534"/>
+    <circle cx="180" cy="875" r="6"  fill="#FFAD00"/>
+    <rect x="300"  y="840" width="10" height="22" rx="5" transform="rotate(30 300 840)"  fill="#0CBFA5"/>
+    <circle cx="440" cy="865" r="5"  fill="#7E4910"/>
+    <rect x="570"  y="855" width="9"  height="20" rx="4" transform="rotate(-28 570 855)"  fill="#F05534"/>
+    <circle cx="690" cy="870" r="7"  fill="#0CBFA5"/>
+    <rect x="800"  y="845" width="10" height="22" rx="5" transform="rotate(22 800 845)"  fill="#FFAD00"/>
+
+    <circle cx="130" cy="1040" r="7" fill="#F05534"/>
+    <rect x="250"  y="1020" width="10" height="22" rx="5" transform="rotate(-15 250 1020)" fill="#0CBFA5"/>
+    <circle cx="390" cy="1050" r="5" fill="#FFAD00"/>
+    <rect x="510"  y="1030" width="9"  height="20" rx="4" transform="rotate(25 510 1030)" fill="#7E4910"/>
+    <circle cx="640" cy="1045" r="6" fill="#F05534"/>
+    <rect x="760"  y="1025" width="10" height="22" rx="5" transform="rotate(-30 760 1025)" fill="#0CBFA5"/>
+    <circle cx="840" cy="1055" r="5" fill="#FFAD00"/>
+
+    <rect x="100"  y="1150" width="10" height="22" rx="5" transform="rotate(20 100 1150)" fill="#F05534"/>
+    <circle cx="230" cy="1170" r="6" fill="#0CBFA5"/>
+    <rect x="380"  y="1145" width="9"  height="20" rx="4" transform="rotate(-22 380 1145)" fill="#FFAD00"/>
+    <circle cx="520" cy="1175" r="7" fill="#7E4910"/>
+    <rect x="660"  y="1155" width="10" height="22" rx="5" transform="rotate(18 660 1155)" fill="#0CBFA5"/>
+    <circle cx="790" cy="1165" r="5" fill="#F05534"/>
+  </svg>
+
+  <div class="shea-faq-inner">
+
+    <!-- ═══ HEADER ROW ═══ -->
+    <div class="shea-faq-header">
+
+      <!-- Left: Title + Subtext -->
+      <div class="shea-faq-header-left">
+        <h1 class="shea-faq-title">
+          <span>SNACK</span>
+          <span>QUESTIONS?</span>
+        </h1>
+        <p class="shea-faq-subtext">
+          {{ section.settings.subhead | default: "We've got answers! If you don't see yours, just reach out — we love hearing from our <span class='faq-squad-link'>Snack Squad!</span> 🧡" }}
+        </p>
+      </div>
+
+      <!-- Right: Necklace image (user will upload) -->
+      <div class="shea-faq-header-right">
+        {%- if section.settings.necklace_image != blank -%}
+          <img
+            src="{{ section.settings.necklace_image | image_url: width: 440 }}"
+            alt="Snacklace Pretzel Necklace"
+            width="220"
+            height="260"
+            loading="eager">
+        {%- else -%}
+          <!-- SVG Inline Necklace Placeholder matching mockup style -->
+          <div class="shea-faq-necklace-placeholder">
+            <svg width="220" height="280" viewBox="0 0 220 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- String/cord of necklace -->
+              <path d="M110 10 C 160 10, 200 50, 200 90 C 200 130, 165 155, 110 165 C 55 155, 20 130, 20 90 C 20 50, 60 10, 110 10Z" stroke="#8B5C2A" stroke-width="5" fill="none"/>
+              <!-- Colorful beads along the top arc -->
+              <circle cx="110" cy="10" r="11" fill="#F05534" stroke="#4A2C11" stroke-width="2.5"/>
+              <circle cx="85"  cy="14" r="10" fill="#FFAD00" stroke="#4A2C11" stroke-width="2.5"/>
+              <circle cx="62"  cy="26" r="10" fill="#0CBFA5" stroke="#4A2C11" stroke-width="2.5"/>
+              <circle cx="44"  cy="44" r="10" fill="#F05534" stroke="#4A2C11" stroke-width="2.5"/>
+              <circle cx="32"  cy="66" r="10" fill="#FFAD00" stroke="#4A2C11" stroke-width="2.5"/>
+              <circle cx="27"  cy="90" r="10" fill="#0CBFA5" stroke="#4A2C11" stroke-width="2.5"/>
+              <circle cx="135" cy="14" r="10" fill="#0CBFA5" stroke="#4A2C11" stroke-width="2.5"/>
+              <circle cx="158" cy="26" r="10" fill="#F05534" stroke="#4A2C11" stroke-width="2.5"/>
+              <circle cx="176" cy="44" r="10" fill="#FFAD00" stroke="#4A2C11" stroke-width="2.5"/>
+              <circle cx="188" cy="66" r="10" fill="#0CBFA5" stroke="#4A2C11" stroke-width="2.5"/>
+              <circle cx="193" cy="90" r="10" fill="#F05534" stroke="#4A2C11" stroke-width="2.5"/>
+              <!-- String line hanging down to pretzel -->
+              <line x1="27" y1="100" x2="60" y2="165" stroke="#8B5C2A" stroke-width="4" stroke-linecap="round"/>
+              <line x1="193" y1="100" x2="160" y2="165" stroke="#8B5C2A" stroke-width="4" stroke-linecap="round"/>
+              <!-- Sunburst around pretzel -->
+              <g opacity="0.9" transform="translate(110, 210)">
+                <line x1="0" y1="-48" x2="0" y2="-38"   stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <line x1="34" y1="-34" x2="27" y2="-27" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <line x1="48" y1="0"   x2="38" y2="0"   stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <line x1="34" y1="34"  x2="27" y2="27"  stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <line x1="0"  y1="48"  x2="0"  y2="38"  stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <line x1="-34" y1="34" x2="-27" y2="27" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <line x1="-48" y1="0"  x2="-38" y2="0"  stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <line x1="-34" y1="-34" x2="-27" y2="-27" stroke="white" stroke-width="3" stroke-linecap="round"/>
+              </g>
+              <!-- Pretzel shape -->
+              <g transform="translate(110, 210)">
+                <!-- Pretzel body path -->
+                <path d="M0,-38 C-15,-38 -26,-26 -26,-12 C-26,2 -15,12 0,12 C15,12 26,2 26,-12 C26,-20 20,-28 12,-32 L0,-38Z" fill="#D4872A" stroke="#4A2C11" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M0,-38 C15,-38 26,-26 26,-12 C26,2 15,12 0,12 C-15,12 -26,2 -26,-12 C-26,-20 -20,-28 -12,-32 L0,-38Z" fill="#E8A040" stroke="#4A2C11" stroke-width="3" stroke-linejoin="round"/>
+                <!-- Pretzel loops -->
+                <ellipse cx="-16" cy="-8" rx="11" ry="14" fill="#D4872A" stroke="#4A2C11" stroke-width="2.5"/>
+                <ellipse cx="16"  cy="-8" rx="11" ry="14" fill="#D4872A" stroke="#4A2C11" stroke-width="2.5"/>
+                <!-- Bottom knot -->
+                <ellipse cx="0" cy="20" rx="16" ry="10" fill="#E8A040" stroke="#4A2C11" stroke-width="2.5"/>
+                <!-- Salt dots -->
+                <circle cx="-18" cy="-10" r="2.5" fill="white"/>
+                <circle cx="-12" cy="-2"  r="2"   fill="white"/>
+                <circle cx="18"  cy="-10" r="2.5" fill="white"/>
+                <circle cx="12"  cy="-2"  r="2"   fill="white"/>
+                <circle cx="-4"  cy="18"  r="2"   fill="white"/>
+                <circle cx="5"   cy="22"  r="2"   fill="white"/>
+              </g>
+            </svg>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- ═══ FAQ ACCORDION LIST ═══ -->
+    <div class="shea-faq-list">
+      {%- for block in section.blocks -%}
+        <details
+          class="shea-faq-item"
+          {% if forloop.first and section.settings.open_first %}open{% endif %}
+          {{ block.shopify_attributes }}>
+
+          <summary class="shea-faq-summary">
+            <div class="shea-faq-q-row">
+              <span class="shea-faq-badge" aria-hidden="true">?</span>
+              <span class="shea-faq-question">{{ block.settings.question }}</span>
+            </div>
+            <svg class="shea-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+
+          <div class="shea-faq-answer">
+            {{ block.settings.answer }}
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+
+    <!-- ═══ BOTTOM CTA CARD ═══ -->
+    {%- if section.settings.show_contact_card -%}
+      <div class="shea-faq-cta-card">
+
+        <!-- Left: Mascot (user uploads later) -->
+        <div class="shea-faq-cta-mascot">
+          {%- if section.settings.mascot_image != blank -%}
+            <img
+              src="{{ section.settings.mascot_image | image_url: width: 280 }}"
+              alt="Shea Mascot"
+              width="140"
+              loading="lazy">
+          {%- else -%}
+            <!-- Inline SVG boy mascot placeholder -->
+            <div class="shea-faq-cta-mascot-placeholder">
+              <svg width="120" height="130" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Body -->
+                <rect x="30" y="75" width="60" height="50" rx="12" fill="#0CBFA5" stroke="#4A2C11" stroke-width="2.5"/>
+                <!-- Head -->
+                <ellipse cx="60" cy="55" rx="28" ry="30" fill="#F7D08A" stroke="#4A2C11" stroke-width="2.5"/>
+                <!-- Hair -->
+                <path d="M32 42 C 35 22, 85 22, 88 42 C 80 30, 40 30, 32 42Z" fill="#FFD966" stroke="#4A2C11" stroke-width="2"/>
+                <!-- Eyes -->
+                <ellipse cx="48" cy="52" rx="5" ry="6" fill="white" stroke="#4A2C11" stroke-width="1.5"/>
+                <ellipse cx="72" cy="52" rx="5" ry="6" fill="white" stroke="#4A2C11" stroke-width="1.5"/>
+                <circle cx="50" cy="54" r="3" fill="#4A2C11"/>
+                <circle cx="74" cy="54" r="3" fill="#4A2C11"/>
+                <!-- Big smile -->
+                <path d="M44 66 Q60 78 76 66" stroke="#4A2C11" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <!-- Cheeks -->
+                <circle cx="42" cy="64" r="6" fill="#F05534" opacity="0.35"/>
+                <circle cx="78" cy="64" r="6" fill="#F05534" opacity="0.35"/>
+                <!-- Thumb up arm -->
+                <rect x="82" y="80" width="14" height="35" rx="7" fill="#F7D08A" stroke="#4A2C11" stroke-width="2" transform="rotate(-15 82 80)"/>
+                <!-- Thumb -->
+                <ellipse cx="100" cy="73" rx="8" ry="10" fill="#F7D08A" stroke="#4A2C11" stroke-width="2"/>
+                <!-- Bead necklace -->
+                <circle cx="44" cy="82" r="4" fill="#F05534" stroke="#4A2C11" stroke-width="1.5"/>
+                <circle cx="52" cy="78" r="4" fill="#FFAD00" stroke="#4A2C11" stroke-width="1.5"/>
+                <circle cx="60" cy="77" r="4" fill="#0CBFA5" stroke="#4A2C11" stroke-width="1.5"/>
+                <circle cx="68" cy="78" r="4" fill="#F05534" stroke="#4A2C11" stroke-width="1.5"/>
+                <circle cx="76" cy="82" r="4" fill="#FFAD00" stroke="#4A2C11" stroke-width="1.5"/>
+              </svg>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <!-- Center: Text & Button -->
+        <div class="shea-faq-cta-text">
+          <h3 class="shea-faq-cta-heading">{{ section.settings.contact_heading | default: "Still have a question?" }}</h3>
+          <p class="shea-faq-cta-sub">{{ section.settings.contact_subhead | default: "We're here to help and love hearing from you! 🧡" }}</p>
+          <a href="{{ section.settings.contact_link | default: '/pages/contact' }}" class="shea-faq-cta-btn">
+            {{ section.settings.contact_btn_label | default: "CONTACT US" }} &rarr;
+          </a>
+        </div>
+
+        <!-- Right: Jar (user uploads later) -->
+        <div class="shea-faq-cta-jar">
+          {%- if section.settings.jar_image != blank -%}
+            <img
+              src="{{ section.settings.jar_image | image_url: width: 240 }}"
+              alt="Pretzel Jar"
+              width="120"
+              loading="lazy">
+          {%- else -%}
+            <!-- Inline SVG jar placeholder -->
+            <div class="shea-faq-cta-jar-placeholder">
+              <svg width="110" height="120" viewBox="0 0 110 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Jar body -->
+                <rect x="18" y="35" width="74" height="78" rx="12" fill="white" fill-opacity="0.85" stroke="#4A2C11" stroke-width="2.5"/>
+                <!-- Jar highlight -->
+                <rect x="24" y="42" width="16" height="50" rx="8" fill="white" opacity="0.5"/>
+                <!-- Lid -->
+                <rect x="14" y="22" width="82" height="18" rx="9" fill="#B0B0B0" stroke="#4A2C11" stroke-width="2.5"/>
+                <!-- Pretzels in jar -->
+                <g transform="translate(55, 60)">
+                  <ellipse cx="-10" cy="-5" rx="9" ry="11" fill="#D4872A" stroke="#4A2C11" stroke-width="2"/>
+                  <ellipse cx="10"  cy="-5" rx="9" ry="11" fill="#E8A040" stroke="#4A2C11" stroke-width="2"/>
+                  <ellipse cx="0"   cy="8"  rx="9" ry="11" fill="#D4872A" stroke="#4A2C11" stroke-width="2"/>
+                  <circle cx="-12" cy="-7" r="2" fill="white"/>
+                  <circle cx="12"  cy="-7" r="2" fill="white"/>
+                  <circle cx="0"   cy="6"  r="2" fill="white"/>
+                </g>
+                <!-- Pretzel sticking out top -->
+                <ellipse cx="55" cy="26" rx="12" ry="8" fill="#E8A040" stroke="#4A2C11" stroke-width="2"/>
+                <circle cx="50" cy="24" r="2" fill="white"/>
+                <circle cx="60" cy="24" r="2" fill="white"/>
+              </svg>
+            </div>
+          {%- endif -%}
+        </div>
+
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shea FAQ Accordion",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subheading Text",
+      "default": "We've got answers! If you don't see yours, just reach out — we love hearing from our <span class='faq-squad-link'>Snack Squad!</span> 🧡"
+    },
+    {
+      "type": "image_picker",
+      "id": "necklace_image",
+      "label": "Necklace Illustration (Top Right)"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open First FAQ by Default",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Bottom Contact Card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact_card",
+      "label": "Show Contact Card",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "mascot_image",
+      "label": "Mascot Image (Left side of card)"
+    },
+    {
+      "type": "image_picker",
+      "id": "jar_image",
+      "label": "Pretzel Jar Image (Right side of card)"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Card Heading",
+      "default": "Still have a question?"
+    },
+    {
+      "type": "text",
+      "id": "contact_subhead",
+      "label": "Card Subheading",
+      "default": "We're here to help and love hearing from you! 🧡"
+    },
+    {
+      "type": "text",
+      "id": "contact_btn_label",
+      "label": "Button Text",
+      "default": "CONTACT US"
+    },
+    {
+      "type": "url",
+      "id": "contact_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 700,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "label": "Container Max Width",
+      "default": 960
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What are Snacklaces?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Snacklaces are wearable pretzel necklaces that are super fun to wear and even better to eat! Each one is handmade with tasty ingredients and lots of love by 7-year-old snack boss, Shea. 🥨</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shea FAQ Accordion",
+      "blocks": [
+        { "type": "faq_item", "settings": { "question": "What are Snacklaces?", "answer": "<p>Snacklaces are wearable pretzel necklaces that are super fun to wear and even better to eat! Each one is handmade with tasty ingredients and lots of love by 7-year-old snack boss, Shea. 🥨</p>" } },
+        { "type": "faq_item", "settings": { "question": "What flavors do you offer?", "answer": "<p>We offer four delicious flavors: Original Pretzel ($3), Chocolate Pretzel ($5), White Chocolate Pretzel ($5), and Gluten-Free Pretzel ($5)!</p>" } },
+        { "type": "faq_item", "settings": { "question": "Are Snacklaces safe for kids?", "answer": "<p>Yes! Our Snacklaces are made with simple, snackable ingredients. However, because they contain small pieces, we recommend adult supervision for children under 3 years old. Safety first, snacks second! 💛</p><p>See our <a href='/pages/whats-inside'>Ingredients & Allergens</a> page for full details.</p>" } },
+        { "type": "faq_item", "settings": { "question": "What ingredients are in your Snacklaces?", "answer": "<p>We use quality pretzels, creamy coatings, and simple baking ingredients. See our <a href='/pages/whats-inside'>What's Inside & Allergens</a> page for complete ingredient lists.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Do you offer gluten-free options?", "answer": "<p>Yes! Our Gluten-Free Pretzel Snacklace is made with certified gluten-free pretzels so everyone can snack along!</p>" } },
+        { "type": "faq_item", "settings": { "question": "How should I store my Snacklaces?", "answer": "<p>Store your Snacklaces in a cool, dry place away from direct sunlight. In warm weather, keep chocolate snacklaces cool so they don't melt!</p>" } },
+        { "type": "faq_item", "settings": { "question": "How long do Snacklaces stay fresh?", "answer": "<p>Snacklaces stay fresh, crunchy, and delicious for up to 3 weeks in their sealed packaging.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Do you ship everywhere?", "answer": "<p>We currently ship anywhere in the United States! Orders typically process in 1-2 business days.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Can I order Snacklaces for a party or event?", "answer": "<p>Absolutely! Check out our <a href='/pages/party-packs'>Party Packs</a> (10, 20, or 50 count) or reach out via our <a href='/pages/contact'>Contact</a> page for custom party orders!</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

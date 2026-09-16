@@ -1,0 +1,114 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "sheas_trust_bar": {
+      "type": "sheas-trust-bar",
+      "blocks": {
+        "trust_1": {
+          "type": "trust_item",
+          "settings": {
+            "icon_preset": "pretzel",
+            "title": "HANDMADE WITH LOVE",
+            "emoji_suffix": "❤️"
+          }
+        },
+        "trust_2": {
+          "type": "trust_item",
+          "settings": {
+            "icon_preset": "calendar",
+            "title": "FRESH & DELICIOUS",
+            "emoji_suffix": ""
+          }
+        },
+        "trust_3": {
+          "type": "trust_item",
+          "settings": {
+            "icon_preset": "shield",
+            "title": "SAFE INGREDIENTS YOU CAN TRUST",
+            "emoji_suffix": ""
+          }
+        },
+        "trust_4": {
+          "type": "trust_item",
+          "settings": {
+            "icon_preset": "heart",
+            "title": "SUPPORT A KIDPRENEUR!",
+            "emoji_suffix": ""
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4"
+      ],
+      "settings": {
+        "show_scallop_wave": true,
+        "bg_color": "#FFFBEA",
+        "divider_color": "#FFAD00",
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "margin_top": 0
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "brand_story": {
+          "type": "text",
+          "settings": {
+            "heading": "SHEA'S SNACKLACES 🥨",
+            "subtext": "<p><strong>Snacks You Wear. Then Eat!</strong></p><p>Handmade in small batches with love, crunch, and lots of smile energy by a 7-year-old snack boss! Wear it proud. Snack it anytime!</p>"
+          }
+        },
+        "quick_links": {
+          "type": "link_list",
+          "settings": {
+            "heading": "EXPLORE",
+            "menu": "footer"
+          }
+        },
+        "occasions_links": {
+          "type": "link_list",
+          "settings": {
+            "heading": "OCCASIONS",
+            "menu": "main-menu"
+          }
+        }
+      },
+      "block_order": [
+        "brand_story",
+        "quick_links",
+        "occasions_links"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "bg_color": "#0CBFA5",
+        "heading_color": "#FFC923",
+        "text_color": "#FFFFFF",
+        "bottom_bg_color": "#089682",
+        "newsletter_enable": true,
+        "newsletter_heading": "JOIN THE SNACK SQUAD! 🎉",
+        "newsletter_subtext": "Get 10% off + secret snack drops! ✨",
+        "tagline_text": "Wear It. Snack It. Love It.",
+        "signoff_text": "Handmade with love by Shea, age 7. ❤️",
+        "custom_copyright": "© 2026 Shea's Snacklaces. All rights reserved.",
+        "enable_follow_on_shop": false,
+        "show_social": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 40,
+        "padding_bottom": 32
+      }
+    }
+  },
+  "order": [
+    "sheas_trust_bar",
+    "footer"
+  ]
+}

@@ -1,0 +1,553 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .shea-products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    width: 100%;
+  }
+
+  .shea-product-card {
+    background: #FFFFFF;
+    border: 3.5px solid var(--shea-border-color, #7E4910);
+    border-radius: 28px;
+    box-shadow: 0 8px 0 rgba(126, 73, 16, 0.18);
+    padding: 24px 18px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  }
+
+  .shea-product-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 18px 0 rgba(126, 73, 16, 0.25);
+  }
+
+  .shea-flavor-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-family: var(--shea-font-display, 'Fredoka', cursive, sans-serif);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin: 0 auto 10px;
+    border: 1.5px solid var(--shea-border-color, #7E4910);
+  }
+
+  .shea-product-title {
+    font-family: var(--shea-font-display, 'Fredoka', cursive, sans-serif);
+    font-size: 1.22rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0 0 12px;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* 3D DTC Halo Glow Background */
+  .shea-product-img-wrap {
+    margin: 4px 0 16px;
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    position: relative;
+    overflow: visible;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .shea-halo-coral {
+    background: radial-gradient(circle, rgba(240, 85, 52, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+
+  .shea-halo-teal {
+    background: radial-gradient(circle, rgba(12, 191, 165, 0.14) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+
+  .shea-halo-gold {
+    background: radial-gradient(circle, rgba(255, 173, 0, 0.16) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+
+  .shea-halo-yellow {
+    background: radial-gradient(circle, rgba(255, 201, 35, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+
+  .shea-product-img {
+    max-width: 100%;
+    max-height: 155px;
+    object-fit: contain;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .shea-product-card:hover .shea-product-img {
+    transform: scale(1.1) rotate(-3deg);
+  }
+
+  .shea-product-desc {
+    font-family: var(--shea-font-body, 'Quicksand', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--shea-dark-brown, #4A2C11);
+    line-height: 1.4;
+    margin: 0 0 16px;
+    min-height: 40px;
+  }
+
+  .shea-product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 2.5px dotted rgba(126, 73, 16, 0.25);
+  }
+
+  .shea-circle-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--shea-teal, #0CBFA5);
+    border: 2.5px solid var(--shea-border-color, #7E4910);
+    box-shadow: 0 3px 0 var(--shea-border-color, #7E4910);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+
+  .shea-circle-btn:hover {
+    transform: scale(1.15) rotate(5deg);
+    background-color: #0AA891;
+    box-shadow: 0 5px 0 var(--shea-border-color, #7E4910);
+  }
+
+  @media (max-width: 1024px) {
+    .shea-products-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .shea-products-grid {
+      grid-template-columns: 1fr;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+{%- endstyle -%}
+
+<div id="SheaProducts-{{ section.id }}" class="shea-products-wrap section-{{ section.id }}-padding">
+  <div class="shea-container">
+    {%- if section.settings.heading != blank or section.settings.subhead != blank -%}
+      <div class="shea-section-header">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="shea-section-title">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subhead != blank -%}
+          <p class="shea-section-subhead">{{ section.settings.subhead }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- liquid
+      assign target_collection = section.settings.collection
+      if target_collection == blank or target_collection.products.size == 0
+        assign target_collection = collections['all']
+      endif
+    -%}
+
+    <div class="shea-products-grid">
+      {%- if target_collection != blank and target_collection.products.size > 0 -%}
+        <!-- Render Products from Selected or Default Store Collection -->
+        {%- for product in target_collection.products limit: section.settings.products_to_show -%}
+          {%- liquid
+            assign mod = forloop.index0 | modulo: 4
+            case mod
+              when 0
+                assign title_color = '#F05534'
+                assign halo_class = 'shea-halo-coral'
+                assign badge_bg = '#FFF0ED'
+                assign badge_color = '#F05534'
+                assign default_badge = '🥨 ORIGINAL'
+              when 1
+                assign title_color = '#0CBFA5'
+                assign halo_class = 'shea-halo-teal'
+                assign badge_bg = '#E7F9F6'
+                assign badge_color = '#0CBFA5'
+                assign default_badge = '🍫 CHOCOLATE'
+              when 2
+                assign title_color = '#0CBFA5'
+                assign halo_class = 'shea-halo-gold'
+                assign badge_bg = '#FFF9E6'
+                assign badge_color = '#FFAD00'
+                assign default_badge = '🤍 WHITE CHOC'
+              when 3
+                assign title_color = '#F05534'
+                assign halo_class = 'shea-halo-yellow'
+                assign badge_bg = '#FFF0ED'
+                assign badge_color = '#F05534'
+                assign default_badge = '🌾 GLUTEN-FREE'
+            endcase
+          -%}
+          <div class="shea-product-card">
+            <div>
+              <div class="shea-flavor-badge" style="background-color: {{ badge_bg }}; color: {{ badge_color }};">
+                {{ default_badge }}
+              </div>
+
+              <h3 class="shea-product-title" style="color: {{ title_color }};">{{ product.title }}</h3>
+              
+              <div class="shea-product-img-wrap {{ halo_class }}">
+                {%- if product.featured_image != blank -%}
+                  {{ product.featured_image | image_url: width: 400 | image_tag: 
+                    class: 'shea-product-img',
+                    loading: 'lazy',
+                    alt: product.title | escape
+                  }}
+                {%- else -%}
+                  <div class="shea-product-img placeholder-svg">
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  </div>
+                {%- endif -%}
+              </div>
+
+              <p class="shea-product-desc">
+                {{ product.description | strip_html | truncatewords: 8 | default: 'Crispy, crunchy, wearable snack goodness!' }}
+              </p>
+            </div>
+
+            <div class="shea-product-footer">
+              <span class="shea-price-pill">{{ product.price | money }}</span>
+              <a href="{{ product.url }}" class="shea-circle-btn" aria-label="View {{ product.title }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Render Custom Blocks (4 Flavors fallback) -->
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign mod = forloop.index0 | modulo: 4
+            case mod
+              when 0
+                assign halo_class = 'shea-halo-coral'
+                assign badge_bg = '#FFF0ED'
+                assign badge_color = '#F05534'
+                assign default_badge = '🥨 ORIGINAL'
+              when 1
+                assign halo_class = 'shea-halo-teal'
+                assign badge_bg = '#E7F9F6'
+                assign badge_color = '#0CBFA5'
+                assign default_badge = '🍫 CHOCOLATE'
+              when 2
+                assign halo_class = 'shea-halo-gold'
+                assign badge_bg = '#FFF9E6'
+                assign badge_color = '#FFAD00'
+                assign default_badge = '🤍 WHITE CHOC'
+              when 3
+                assign halo_class = 'shea-halo-yellow'
+                assign badge_bg = '#FFF0ED'
+                assign badge_color = '#F05534'
+                assign default_badge = '🌾 GLUTEN-FREE'
+            endcase
+          -%}
+          <div class="shea-product-card" {{ block.shopify_attributes }}>
+            <div>
+              <div class="shea-flavor-badge" style="background-color: {{ block.settings.badge_bg | default: badge_bg }}; color: {{ block.settings.badge_color | default: badge_color }};">
+                {{ block.settings.badge_text | default: default_badge }}
+              </div>
+
+              <h3 class="shea-product-title" style="color: {{ block.settings.title_color }};">
+                {{ block.settings.title }}
+              </h3>
+
+              <div class="shea-product-img-wrap {{ halo_class }}">
+                {%- if block.settings.product_image != blank -%}
+                  {{ block.settings.product_image | image_url: width: 400 | image_tag: 
+                    class: 'shea-product-img',
+                    loading: 'lazy',
+                    alt: block.settings.title | escape
+                  }}
+                {%- else -%}
+                  <!-- Vector SVG fallback matching mockup flavor -->
+                  <svg class="shea-product-img" viewBox="0 0 200 200" width="160" height="160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {%- case forloop.index -%}
+                      {%- when 1 -%}
+                        <!-- 1. Original Pretzel Snacklace (Golden) -->
+                        <circle cx="42" cy="45" r="9" fill="#FFC923" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="52" cy="65" r="9" fill="#0CBFA5" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="65" cy="84" r="9" fill="#F05534" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="80" cy="100" r="9" fill="#FFAD00" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="158" cy="45" r="9" fill="#FFC923" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="148" cy="65" r="9" fill="#0CBFA5" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="135" cy="84" r="9" fill="#F05534" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="120" cy="100" r="9" fill="#FFAD00" stroke="#7E4910" stroke-width="2.5"/>
+                        <path d="M100 108 C80 90, 52 100, 52 126 C52 152, 82 170, 100 170 C118 170, 148 152, 148 126 C148 100, 120 90, 100 108 Z" fill="#E59828" stroke="#7E4910" stroke-width="3.5" stroke-linejoin="round"/>
+                        <ellipse cx="78" cy="126" rx="11" ry="13" fill="#FFFFFF" stroke="#7E4910" stroke-width="3"/>
+                        <ellipse cx="122" cy="126" rx="11" ry="13" fill="#FFFFFF" stroke="#7E4910" stroke-width="3"/>
+                        <ellipse cx="100" cy="150" rx="9" ry="7" fill="#FFFFFF" stroke="#7E4910" stroke-width="3"/>
+                        <circle cx="70" cy="112" r="2.5" fill="#FFFFFF"/>
+                        <circle cx="130" cy="112" r="2.5" fill="#FFFFFF"/>
+                        <circle cx="100" cy="136" r="2" fill="#FFFFFF"/>
+                      {%- when 2 -%}
+                        <!-- 2. Chocolate Pretzel (Rich Milk Chocolate) -->
+                        <circle cx="42" cy="45" r="9" fill="#5C3818" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="52" cy="65" r="9" fill="#0CBFA5" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="65" cy="84" r="9" fill="#5C3818" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="80" cy="100" r="9" fill="#FFAD00" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="158" cy="45" r="9" fill="#5C3818" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="148" cy="65" r="9" fill="#0CBFA5" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="135" cy="84" r="9" fill="#5C3818" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="120" cy="100" r="9" fill="#FFAD00" stroke="#7E4910" stroke-width="2.5"/>
+                        <path d="M100 108 C80 90, 52 100, 52 126 C52 152, 82 170, 100 170 C118 170, 148 152, 148 126 C148 100, 120 90, 100 108 Z" fill="#5C3818" stroke="#38200C" stroke-width="3.5" stroke-linejoin="round"/>
+                        <ellipse cx="78" cy="126" rx="11" ry="13" fill="#FFFFFF" stroke="#38200C" stroke-width="3"/>
+                        <ellipse cx="122" cy="126" rx="11" ry="13" fill="#FFFFFF" stroke="#38200C" stroke-width="3"/>
+                        <ellipse cx="100" cy="150" rx="9" ry="7" fill="#FFFFFF" stroke="#38200C" stroke-width="3"/>
+                        <path d="M64 120 Q80 110 100 125 Q120 110 136 120" stroke="#8C5828" stroke-width="2.5" stroke-linecap="round"/>
+                      {%- when 3 -%}
+                        <!-- 3. White Chocolate Pretzel (Creamy Iced) -->
+                        <circle cx="42" cy="45" r="9" fill="#FFFDF4" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="52" cy="65" r="9" fill="#0CBFA5" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="65" cy="84" r="9" fill="#FFFDF4" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="80" cy="100" r="9" fill="#F05534" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="158" cy="45" r="9" fill="#FFFDF4" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="148" cy="65" r="9" fill="#0CBFA5" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="135" cy="84" r="9" fill="#FFFDF4" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="120" cy="100" r="9" fill="#F05534" stroke="#7E4910" stroke-width="2.5"/>
+                        <path d="M100 108 C80 90, 52 100, 52 126 C52 152, 82 170, 100 170 C118 170, 148 152, 148 126 C148 100, 120 90, 100 108 Z" fill="#FFFDF0" stroke="#7E4910" stroke-width="3.5" stroke-linejoin="round"/>
+                        <ellipse cx="78" cy="126" rx="11" ry="13" fill="#FFFFFF" stroke="#7E4910" stroke-width="3"/>
+                        <ellipse cx="122" cy="126" rx="11" ry="13" fill="#FFFFFF" stroke="#7E4910" stroke-width="3"/>
+                        <ellipse cx="100" cy="150" rx="9" ry="7" fill="#FFFFFF" stroke="#7E4910" stroke-width="3"/>
+                        <path d="M66 122 Q80 114 100 126 Q120 114 134 122" stroke="#0CBFA5" stroke-width="2" stroke-linecap="round"/>
+                      {%- else -%}
+                        <!-- 4. Gluten-Free Pretzel (Golden Crisp) -->
+                        <circle cx="42" cy="45" r="9" fill="#FFC923" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="52" cy="65" r="9" fill="#F05534" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="65" cy="84" r="9" fill="#FFAD00" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="80" cy="100" r="9" fill="#0CBFA5" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="158" cy="45" r="9" fill="#FFC923" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="148" cy="65" r="9" fill="#F05534" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="135" cy="84" r="9" fill="#FFAD00" stroke="#7E4910" stroke-width="2.5"/>
+                        <circle cx="120" cy="100" r="9" fill="#0CBFA5" stroke="#7E4910" stroke-width="2.5"/>
+                        <path d="M100 108 C80 90, 52 100, 52 126 C52 152, 82 170, 100 170 C118 170, 148 152, 148 126 C148 100, 120 90, 100 108 Z" fill="#F4AA28" stroke="#7E4910" stroke-width="3.5" stroke-linejoin="round"/>
+                        <ellipse cx="78" cy="126" rx="11" ry="13" fill="#FFFFFF" stroke="#7E4910" stroke-width="3"/>
+                        <ellipse cx="122" cy="126" rx="11" ry="13" fill="#FFFFFF" stroke="#7E4910" stroke-width="3"/>
+                        <ellipse cx="100" cy="150" rx="9" ry="7" fill="#FFFFFF" stroke="#7E4910" stroke-width="3"/>
+                        <path d="M68 116 L72 120 L76 116 L72 112 Z" fill="#FFFFFF"/>
+                        <path d="M124 116 L128 120 L132 116 L128 112 Z" fill="#FFFFFF"/>
+                    {%- endcase -%}
+                  </svg>
+                {%- endif -%}
+              </div>
+
+              <p class="shea-product-desc">{{ block.settings.description }}</p>
+            </div>
+
+            <div class="shea-product-footer">
+              <span class="shea-price-pill">{{ block.settings.price }}</span>
+              <a href="{{ block.settings.product_link | default: '/collections/all' }}" class="shea-circle-btn" aria-label="Buy {{ block.settings.title }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shea Product Grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading (Optional)"
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Section Subheading (Optional)"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Shopify Collection (Optional)",
+      "info": "Leave empty to use custom flavor blocks below"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Maximum Products to Show",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "flavor_card",
+      "name": "Flavor Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge Text (e.g. 🥨 ORIGINAL)",
+          "default": "🥨 ORIGINAL"
+        },
+        {
+          "type": "color",
+          "id": "badge_bg",
+          "label": "Badge Background Color",
+          "default": "#FFF0ED"
+        },
+        {
+          "type": "color",
+          "id": "badge_color",
+          "label": "Badge Text Color",
+          "default": "#F05534"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "PRETZEL SNACKLACE"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title Color",
+          "default": "#F05534"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product Image"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Short Description",
+          "default": "Classic, salty, and always a favorite!"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price Display",
+          "default": "$3.00"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shea Product Grid",
+      "blocks": [
+        {
+          "type": "flavor_card",
+          "settings": {
+            "badge_text": "🥨 ORIGINAL",
+            "title": "PRETZEL SNACKLACE",
+            "title_color": "#F05534",
+            "description": "Classic, salty, and always a favorite!",
+            "price": "$3.00"
+          }
+        },
+        {
+          "type": "flavor_card",
+          "settings": {
+            "badge_text": "🍫 CHOCOLATE",
+            "title": "CHOCOLATE PRETZEL",
+            "title_color": "#0CBFA5",
+            "description": "Sweet chocolate + salty crunch!",
+            "price": "$5.00"
+          }
+        },
+        {
+          "type": "flavor_card",
+          "settings": {
+            "badge_text": "🤍 WHITE CHOC",
+            "title": "WHITE CHOCOLATE PRETZEL",
+            "title_color": "#0CBFA5",
+            "description": "Sweet, creamy, and oh-so-delicious!",
+            "price": "$5.00"
+          }
+        },
+        {
+          "type": "flavor_card",
+          "settings": {
+            "badge_text": "🌾 GLUTEN-FREE",
+            "title": "GLUTEN-FREE PRETZEL",
+            "title_color": "#F05534",
+            "description": "All the fun. None of the gluten.",
+            "price": "$5.00"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

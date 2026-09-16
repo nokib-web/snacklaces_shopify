@@ -1,0 +1,201 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "sheas_hero": {
+      "type": "sheas-hero",
+      "settings": {
+        "headline_1": "SNACKS",
+        "headline_2": "YOU WEAR.",
+        "headline_3": "THEN EAT.",
+        "subhead": "Delicious. Fun. Totally you. Wear it proud. Snack it anytime!",
+        "badge_text": "",
+        "badge_bg": "#ffffff",
+        "badge_color": "#f05534",
+        "btn_label": "SHOP SNACKLACES",
+        "btn_link": "shopify://collections/all",
+        "secondary_btn_label": "",
+        "secondary_btn_link": "",
+        "hero_image": "shopify://shop_images/shea-hero.webp",
+        "bg_color": "#ffc923",
+        "enable_confetti": true,
+        "padding_top": 32,
+        "padding_bottom": 16
+      }
+    },
+    "sheas_products": {
+      "type": "sheas-product-grid",
+      "blocks": {
+        "flavor_1": {
+          "type": "flavor_card",
+          "settings": {
+            "title": "PRETZEL SNACKLACE",
+            "title_color": "#f05534",
+            "description": "Classic, salty, and always a favorite!",
+            "price": "$3.00",
+            "product_link": "shopify://collections/all"
+          }
+        },
+        "flavor_2": {
+          "type": "flavor_card",
+          "settings": {
+            "title": "CHOCOLATE PRETZEL",
+            "title_color": "#0cbfa5",
+            "description": "Sweet chocolate + salty crunch!",
+            "price": "$5.00",
+            "product_link": "shopify://collections/all"
+          }
+        },
+        "flavor_3": {
+          "type": "flavor_card",
+          "settings": {
+            "title": "WHITE CHOCOLATE PRETZEL",
+            "title_color": "#0cbfa5",
+            "description": "Sweet, creamy, and oh-so-delicious!",
+            "price": "$5.00",
+            "product_link": "shopify://collections/all"
+          }
+        },
+        "flavor_4": {
+          "type": "flavor_card",
+          "settings": {
+            "title": "GLUTEN-FREE PRETZEL",
+            "title_color": "#f05534",
+            "description": "All the fun. None of the gluten.",
+            "price": "$5.00",
+            "product_link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "flavor_1",
+        "flavor_2",
+        "flavor_3",
+        "flavor_4"
+      ],
+      "settings": {
+        "heading": "",
+        "subhead": "",
+        "collection": "all",
+        "products_to_show": 4,
+        "padding_top": 8,
+        "padding_bottom": 24
+      }
+    },
+    "sheas_value_props": {
+      "type": "sheas-value-props",
+      "blocks": {
+        "prop_1": {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "pretzel",
+            "title": "FUN TO WEAR",
+            "title_color": "#0cbfa5",
+            "description": "Lightweight and comfy for all-day fun."
+          }
+        },
+        "prop_2": {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "smiley",
+            "title": "EVEN BETTER TO EAT",
+            "title_color": "#0cbfa5",
+            "description": "Made with yummy ingredients."
+          }
+        },
+        "prop_3": {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "heart",
+            "title": "MADE WITH LOVE",
+            "title_color": "#0cbfa5",
+            "description": "Handmade in small batches by a 7-year-old snack boss!"
+          }
+        },
+        "prop_4": {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "star",
+            "title": "PERFECT FOR ANY OCCASION",
+            "title_color": "#0cbfa5",
+            "description": "Birthdays, parties, gifts & more!"
+          }
+        }
+      },
+      "block_order": [
+        "prop_1",
+        "prop_2",
+        "prop_3",
+        "prop_4"
+      ],
+      "settings": {
+        "card_bg": "#fffbea",
+        "padding_top": 20,
+        "padding_bottom": 32
+      }
+    },
+    "sheas_about": {
+      "type": "sheas-about",
+      "settings": {
+        "heading": "Hi, I'm Shea! 🥨",
+        "story_text": "<p>I made my first snacklace because I wanted a snack I could wear to school. Now I make them for you too! Every necklace is handmade with love (and a little bit of glitter energy). Thanks for snacking with me!</p>",
+        "btn_label": "Shop Snacklaces →",
+        "btn_link": "shopify://collections/all",
+        "image": "shopify://shop_images/mascote_hi.webp",
+        "padding_top": 28,
+        "padding_bottom": 36
+      }
+    },
+    "sheas_reviews": {
+      "type": "sheas-reviews",
+      "blocks": {
+        "rev_1": {
+          "type": "review",
+          "settings": {
+            "quote": "My kids wore them to the park and ate them on the way home. A+!",
+            "author": "Happy Parent"
+          }
+        },
+        "rev_2": {
+          "type": "review",
+          "settings": {
+            "quote": "The cutest, yummiest party favor ever.",
+            "author": "Birthday Mom"
+          }
+        },
+        "rev_3": {
+          "type": "review",
+          "settings": {
+            "quote": "Finally, a snack that's also an accessory. Genius, Shea!",
+            "author": "Snack Fan"
+          }
+        }
+      },
+      "block_order": [
+        "rev_1",
+        "rev_2",
+        "rev_3"
+      ],
+      "settings": {
+        "heading": "Snack Squad Says…",
+        "subhead": "Loved by kids, trusted by parents! 🥨",
+        "padding_top": 28,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "sheas_hero",
+    "sheas_products",
+    "sheas_value_props",
+    "sheas_about",
+    "sheas_reviews"
+  ]
+}

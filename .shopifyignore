@@ -1,0 +1,9 @@
+# Shopify Ignore File
+mockups/*
+node_modules/*
+.vscode/*
+.git/*
+*.md
+.gitignore
+.DS_Store
+Thumbs.db

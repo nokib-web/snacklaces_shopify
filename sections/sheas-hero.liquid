@@ -1,0 +1,191 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #SheaHero-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+  }
+{%- endstyle -%}
+
+<div id="SheaHero-{{ section.id }}" class="shea-hero-wrap section-{{ section.id }}-padding {% if section.settings.enable_confetti %}shea-confetti-bg{% endif %}">
+  <div class="shea-container">
+    <div class="shea-hero-grid">
+      <!-- Left Content -->
+      <div class="shea-hero-content">
+        {%- if section.settings.badge_text != blank -%}
+          <div class="shea-pill-badge" style="background-color: {{ section.settings.badge_bg }}; color: {{ section.settings.badge_color }}; margin-bottom: 16px;">
+            {{ section.settings.badge_text }}
+          </div>
+        {%- endif -%}
+
+        <h1 class="shea-hero-title">
+          {{ section.settings.headline_1 | default: 'SNACKS' }}<br>
+          <span class="shea-title-teal">{{ section.settings.headline_2 | default: 'YOU WEAR.' }}</span>
+          {{ section.settings.headline_3 | default: 'THEN EAT.' }}
+        </h1>
+
+        <div class="shea-hero-subhead">
+          {{ section.settings.subhead | default: 'Delicious. Fun. Totally you. Wear it proud. Snack it anytime!' }}
+        </div>
+
+        <div class="shea-hero-actions">
+          {%- if section.settings.btn_label != blank -%}
+            <a href="{{ section.settings.btn_link | default: '/collections/all' }}" class="shea-btn shea-btn-coral">
+              {{ section.settings.btn_label }}
+            </a>
+          {%- endif -%}
+
+          {%- if section.settings.secondary_btn_label != blank -%}
+            <a href="{{ section.settings.secondary_btn_link | default: '#about' }}" class="shea-hero-secondary-link">
+              {{ section.settings.secondary_btn_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Right Mascot Image -->
+      <div class="shea-hero-image-wrap">
+        {%- if section.settings.hero_image != blank -%}
+          {{ section.settings.hero_image | image_url: width: 800 | image_tag: 
+            class: 'shea-hero-mascot-img',
+            loading: 'eager',
+            alt: section.settings.hero_image.alt | default: "Shea's Snacklaces Mascot"
+          }}
+        {%- else -%}
+          <img src="{{ 'shea-hero.png' | asset_url }}" 
+               alt="Shea's Snacklaces Mascot" 
+               class="shea-hero-mascot-img" 
+               width="460" 
+               height="460" 
+               loading="eager"
+               onerror="this.src='{{ 'shea-hero.jpg' | asset_url }}'">
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shea Hero Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline_1",
+      "label": "Headline Line 1 (Coral)",
+      "default": "SNACKS"
+    },
+    {
+      "type": "text",
+      "id": "headline_2",
+      "label": "Headline Line 2 (Teal)",
+      "default": "YOU WEAR."
+    },
+    {
+      "type": "text",
+      "id": "headline_3",
+      "label": "Headline Line 3 (Coral)",
+      "default": "THEN EAT."
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subheadline Text",
+      "default": "Delicious. Fun. Totally you. Wear it proud. Snack it anytime!"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Top Badge Text (Optional)",
+      "default": "Handmade by a 7-year-old Snack Boss! ❤️"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg",
+      "label": "Badge Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge Text Color",
+      "default": "#F05534"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Primary Button Label",
+      "default": "SHOP SNACKLACES →"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_btn_label",
+      "label": "Secondary Link Label",
+      "default": "Meet Shea 🥨"
+    },
+    {
+      "type": "url",
+      "id": "secondary_btn_link",
+      "label": "Secondary Link URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Mascot Image (Shea Character)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFC923"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_confetti",
+      "label": "Enable Confetti Pattern Background",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 32
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shea Hero Banner"
+    }
+  ]
+}
+{% endschema %}

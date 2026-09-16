@@ -1,0 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main_contact": {
+      "type": "sheas-contact",
+      "settings": {
+        "heading": "SAY HI!",
+        "subhead": "We'd love to hear from you! Questions, snack ideas, party orders, or just want to say hello? We're all ears!",
+        "name_label": "Your Name",
+        "email_label": "Your Email",
+        "message_label": "Your Message",
+        "btn_label": "SEND IT! 🥨",
+        "speech_text": "Thanks for snacking with me! ❤️",
+        "mascot_image": "shopify://shop_images/contact-sheas.webp",
+        "signoff_text": "Thanks for being part of the Snack Squad! ❤️ — Shea",
+        "enable_confetti": true,
+        "padding_top": 36,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main_contact"
+  ]
+}

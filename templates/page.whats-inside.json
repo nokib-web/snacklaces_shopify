@@ -1,0 +1,109 @@
+{
+  "sections": {
+    "main_whats_inside": {
+      "type": "sheas-whats-inside",
+      "blocks": {
+        "flavor_1": {
+          "type": "ingredient_item",
+          "settings": {
+            "title": "ORIGINAL PRETZEL SNACKLACE",
+            "title_color": "#0CBFA5",
+            "ingredients": "Enriched flour, salt, yeast, malted barley.",
+            "allergen_info": "Contains: [Wheat]"
+          }
+        },
+        "flavor_2": {
+          "type": "ingredient_item",
+          "settings": {
+            "title": "CHOCOLATE PRETZEL SNACKLACE",
+            "title_color": "#F05534",
+            "ingredients": "Pretzels + chocolate coating (sugar, cocoa, milk, soy lecithin).",
+            "allergen_info": "Contains: [Wheat, Milk, Soy]"
+          }
+        },
+        "flavor_3": {
+          "type": "ingredient_item",
+          "settings": {
+            "title": "WHITE CHOCOLATE PRETZEL SNACKLACE",
+            "title_color": "#0CBFA5",
+            "ingredients": "Pretzels + white chocolate coating (sugar, milk, cocoa butter, vanilla).",
+            "allergen_info": "Contains: [Wheat, Milk, Soy]"
+          }
+        },
+        "flavor_4": {
+          "type": "ingredient_item",
+          "settings": {
+            "title": "GLUTEN-FREE PRETZEL SNACKLACE",
+            "title_color": "#F05534",
+            "ingredients": "Gluten-free flour blend (brown rice flour, tapioca starch), salt, yeast.",
+            "allergen_info": "Certified Gluten-Free"
+          }
+        }
+      },
+      "block_order": [
+        "flavor_1",
+        "flavor_2",
+        "flavor_3",
+        "flavor_4"
+      ],
+      "settings": {
+        "heading": "WHAT'S INSIDE",
+        "subhead": "We believe snack time should be fun AND worry-free. Here's exactly what goes into every Snacklace — no mystery, just yumminess!",
+        "warning_heading": "THE IMPORTANT (NOT-SO-SILLY) STUFF",
+        "warning_text": "Our Snacklaces are handmade in a kitchen that also handles wheat, milk, soy, tree nuts, peanuts. If you have allergies, please check with a grown-up before you snack!",
+        "safety_notice": "The string is not for eating — just the snacks! Snacklaces are meant to be enjoyed fresh and worn with a grown-up nearby for little ones.",
+        "warning_bg": "#F05534"
+      }
+    },
+    "value_props": {
+      "type": "sheas-value-props",
+      "blocks": {
+        "prop_1": {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "pretzel",
+            "title": "FUN TO WEAR",
+            "description": "Lightweight and comfy for all-day fun."
+          }
+        },
+        "prop_2": {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "smiley",
+            "title": "EVEN BETTER TO EAT",
+            "description": "Made with yummy ingredients."
+          }
+        },
+        "prop_3": {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "heart",
+            "title": "MADE WITH LOVE",
+            "description": "Handmade in small batches by 7-year-old Shea!"
+          }
+        },
+        "prop_4": {
+          "type": "prop_item",
+          "settings": {
+            "icon_type": "star",
+            "title": "PERFECT FOR ANY OCCASION",
+            "description": "Birthdays, parties, gifts & more!"
+          }
+        }
+      },
+      "block_order": [
+        "prop_1",
+        "prop_2",
+        "prop_3",
+        "prop_4"
+      ],
+      "settings": {
+        "card_bg": "#FFFBEA"
+      }
+    }
+  },
+  "order": [
+    "main_whats_inside",
+    "value_props"
+  ]
+}

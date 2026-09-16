@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main_shipping": {
+      "type": "sheas-shipping",
+      "settings": {
+        "heading": "GETTING YOUR SNACKLACE",
+        "subhead": "We pack every Snacklace with care so it arrives fresh, yummy, and ready to wear (and snack)!",
+        "melt_title": "WARM WEATHER NOTE:",
+        "melt_text": "Chocolate can get melty in hot weather! We use extra care and cool packaging, but we recommend snacking within a few days for best taste and crunch.",
+        "enable_confetti": true
+      }
+    }
+  },
+  "order": [
+    "main_shipping"
+  ]
+}
